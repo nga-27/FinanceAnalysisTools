@@ -1,3 +1,6 @@
 {
-    "finance file": ""
+    "finance file": "",
+    "tasks" : [
+        {"task": "tabular stats", "requested": true}
+    ]
 }

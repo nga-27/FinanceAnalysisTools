@@ -7,7 +7,7 @@ import time
 def startup_script(version='0.0.1', update_release='2019-09-19') -> dict:
     print(" ")
     print("----------------------------------")
-    print("-   Financial Analysis Tools     -")
+    print("-    Finance Analysis Tools      -")
     print("-                                -")
     print("-            nga-27              -")
     print("-                                -")
