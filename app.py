@@ -1,4 +1,5 @@
 from libs import get_finance_file_data
+from libs import startup_script
 
 class App:
 
@@ -7,8 +8,9 @@ class App:
         self.isEnabled = True
 
     def run(self):
-        data = get_finance_file_data()
-        print(f"data: {data}")
+        self.config = startup_script()
+        data = get_finance_file_data(self.config)
+        print(f"data: {data}") 
 
 
 app = App()
