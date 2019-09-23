@@ -1,5 +1,5 @@
 {
-    "finance file": "",
+    "finance file": "SimplifiedFinances.xlsx",
     "tasks" : [
         {"task": "tabular stats", "requested": true}
     ]

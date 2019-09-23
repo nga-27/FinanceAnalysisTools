@@ -9,9 +9,11 @@ def task_handler(config: dict, data: dict):
         print(f"task {i} is '{task['task']}', requested is {task['requested']}")
 
         if task['requested']:
-            run_task(task['task'], data)
+            data = run_task(task['task'], data)
 
 
-def run_task(task: str, data: dict):
+def run_task(task: str, data: dict) -> dict:
     if task == 'tabular stats':
-        tabular_stats(data)
+        data = tabular_stats(data)
+
+    return data
