@@ -1,3 +1,4 @@
-input/*
+input/SimplifiedFinances.xlsx
 config.json
 __pycache__
+output/*
