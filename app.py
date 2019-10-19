@@ -49,6 +49,8 @@ class App:
                 leg.append(str(estimated_return[i])+"%")
             plt.legend([leg[0], leg[1], leg[2]])
             plt.title("Growth of $" + str(key) + "/yr Investment")
+            plt.ylabel("Amount ($)")
+            plt.xlabel("Years from Current Year")
             plt.show()       
 
 
