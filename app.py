@@ -2,8 +2,8 @@ from libs.utils import startup_script, get_finance_file_data
 from libs.tasks import task_handler
 
 ##############################
-__VERSION__ = '0.0.1'
-__DATE__ = '2019-09-22'
+__VERSION__ = '0.0.2'
+__DATE__ = '2019-10-27'
 ##############################
 
 class App:

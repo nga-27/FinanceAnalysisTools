@@ -1,6 +1,7 @@
 {
     "finance file": "SimplifiedFinances.xlsx",
     "tasks" : [
-        {"task": "tabular stats", "requested": true}
+        {"task": "tabular stats", "requested": true},
+        {"task": "growth investment", "requested": false}
     ]
 }
