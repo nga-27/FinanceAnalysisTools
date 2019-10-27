@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np 
 
 from libs.tasks.tabular import tabular_stats
+from libs.tasks.models import growth_investment
 
 def task_handler(config: dict, data: dict):
     tasks = config.get('tasks', [])
@@ -15,5 +16,8 @@ def task_handler(config: dict, data: dict):
 def run_task(task: str, data: dict) -> dict:
     if task == 'tabular stats':
         data = tabular_stats(data)
+    if task == 'growth investment':
+        # TODO: add inputs (if future desired)
+        growth_investment()
 
     return data
