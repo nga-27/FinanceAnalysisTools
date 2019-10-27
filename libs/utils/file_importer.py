@@ -72,6 +72,7 @@ def get_tickers(data: dict) -> dict:
         potential_tickers = ticker_filter_totals(amt_tab, potential_tickers) 
         potential_tickers = ticker_filter_dashes(potential_tickers)
         tickers = cluster_tickers(potential_tickers)
+        data['api'] = tickers
     return tickers
 
 
@@ -117,23 +118,23 @@ def ticker_filter_dashes(ticker_list: list) -> list:
     return filtered_list
 
 
-def cluster_tickers(ticker_list: list) -> list:
+def cluster_tickers(ticker_list: list) -> dict:
     clusters = {}
     clusters['tickers'] = ''
-    clusters['details'] = []
+    clusters['details'] = {}
     for ticker in ticker_list:
         if "-" in ticker:
             tick = ticker.split('-')[1]
             if "HSA" in ticker:
                 clusters['tickers'] += tick + " "
-                clusters['details'].append({"ticker": tick, "type": "HSA"})
+                clusters['details'][tick] = {"type": "HSA"}
             elif "IRA" in ticker: 
                 clusters['tickers'] += tick + " "
-                clusters['details'].append({"ticker": tick, "type": "IRA"})
+                clusters['details'][tick] = {"type": "IRA"}
             else:
                 continue
         else:
             clusters['tickers'] += ticker + ' '
-            clusters['details'].append({"ticker": ticker, "type": "fund"})
+            clusters['details'][ticker] = {"type": "fund"}
 
     return clusters

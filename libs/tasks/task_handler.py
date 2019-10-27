@@ -16,7 +16,7 @@ def task_handler(config: dict, data: dict):
 
 def run_task(task: str, data: dict, api: dict) -> dict:
     if task == 'tabular stats':
-        data['tabular'] = tabular_stats(data['tabular'])
+        data['tabular'] = tabular_stats(data)
     if task == 'growth investment':
         # TODO: add inputs (if future desired)
         growth_investment()

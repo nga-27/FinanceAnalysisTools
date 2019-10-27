@@ -16,20 +16,58 @@ SKIP_KEYS = [
 
 
 def tabular_stats(data: dict): 
+    tabular = data.get('tabular', {})
     for key in T_KEYS:
-        if T_KEYS[key] not in data.keys():
+        if T_KEYS[key] not in tabular.keys():
             print(f"WARNING (Tabular_Stats): Key {key} not found in data. Exiting...")
-            return data
+            return tabular
     
-    gl_period = get_gain_loss_period(data)
-    data['Gain_Loss_Period'] = gl_period[0]
-    data['Gain_Loss_Period_Percent'] = gl_period[1]
+    tabular = update_data_realtime(tabular, data)
+    gl_period = get_gain_loss_period(tabular)
+    tabular['Gain_Loss_Period'] = gl_period[0]
+    tabular['Gain_Loss_Period_Percent'] = gl_period[1]
 
-    data['Total_Return'] = total_return(data)
-    data['YTD_Return'] = ytd_return(data)
+    tabular['Total_Return'] = total_return(tabular)
+    tabular['YTD_Return'] = ytd_return(tabular)
 
-    save_tabular_file(data, filename='finances_output.xlsx')
-    return data
+    save_tabular_file(tabular, filename='finances_output.xlsx')
+    return tabular
+
+
+def update_data_realtime(tabular: dict, data: dict=None) -> dict:
+    download_data = data.get('download_data')
+    api_data = data.get('api')
+
+    if download_data is not None:
+        amt_data = tabular.get(T_KEYS['amount']).copy()
+        qty_data = tabular.get(T_KEYS['qty']).copy()
+
+        if (amt_data is not None) and (qty_data is not None):
+            num_rows = len(amt_data)
+            for fund in download_data.keys():
+                if fund in amt_data.columns:
+                    # print(f"col: {fund}")
+                    qty = qty_data[fund][num_rows-1]
+                    price = download_data[fund]['Close'][len(download_data[fund]['Close'])-1]
+                    total = np.round(qty * price, 2)
+                    amt_data[fund][num_rows-1] = total
+                    # print(f"{qty} at {price} = {total}")
+                else: 
+                    # Keys are speciality (e.g. `HSA`)
+                    special = api_data['details'][fund]['type']
+                    special += f"-{fund}"
+
+                    if special in amt_data.columns:
+                        # print(f"col: {special}")
+                        qty = qty_data[special][num_rows-1]
+                        price = download_data[fund]['Close'][len(download_data[fund]['Close'])-1]
+                        total = np.round(qty * price, 2)
+                        amt_data[special][num_rows-1] = total
+                        # print(f"{qty} at {price} = {total}")
+
+            tabular[T_KEYS['amount']] = amt_data.copy()
+
+    return tabular
     
 
 

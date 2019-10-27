@@ -2,7 +2,7 @@ from libs.utils import startup_script, get_finance_file_data
 from libs.tasks import task_handler
 
 ##############################
-__VERSION__ = '0.0.2'
+__VERSION__ = '0.0.3'
 __DATE__ = '2019-10-27'
 ##############################
 
