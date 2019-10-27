@@ -22,3 +22,14 @@ their funds into any number of groups desired (e.g. "HSA", "401k", "Stocks", "Ca
 grouping. The "Grand Total" column should be the sum of the grouped columns.
 
 Tabs on this spreadsheet required are "Amount", "Qty", and "Contributions" - order does not matter, but they must be present.
+
+#### Special Prefix Labeling
+
+Each tab should have the same columns, ideally in the same place (copy-paste between tabs). Each column title should adhere to a specific prefix
+schema nomenclature for labeling in the form of `PREFIX-FUND`, shown below:
+
+* `Savings`: Any savings accounts (high yield, traditional, etc.) that do not have a ticker symbol (e.g. `Savings-WF`)
+* `IRA`: Any IRA fund; will look up symbol following dash _unless_ "cash" or "core" included (e.g. `IRA-FTANX`)
+* `CD`: Any certificate of deposit that will not have a ticker symbol (e.g. `CD-Discover`)
+* `CVLI`: Any cash-value life insurance policy or amount that will not have a ticker symbol (e.g. `CVLI-NW-Mutual`)
+* `HSA`: Any HSA fund; will look up symbol following dash _unless_ "cash" or "core" included (e.g. `HSA-FTANX`)

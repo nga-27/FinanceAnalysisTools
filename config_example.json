@@ -1,6 +1,7 @@
 {
     "finance file": "SimplifiedFinances.xlsx",
     "tasks" : [
+        {"task": "fetch api data", "requested": true},
         {"task": "tabular stats", "requested": true},
         {"task": "growth investment", "requested": false}
     ]
