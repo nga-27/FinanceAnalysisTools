@@ -14,7 +14,7 @@ class App:
 
     def run(self):
         self.config = startup_script(version=__VERSION__, update_release=__DATE__)
-        self.data = get_finance_file_data(self.config)
+        self.data, self.config = get_finance_file_data(self.config)
         task_handler(self.config, self.data)
 
 

@@ -14,9 +14,10 @@ def get_finance_file_data(core: dict):
     if finance_filename is not None:
         data = get_data(finance_filename)
         data = cleanse_data(data)
-        return data
+        core['api'] = get_tickers(data)
+        return data, core
         
-    return None
+    return None, core
 
 
 def get_data(finance_filename: str) -> dict:
@@ -59,3 +60,42 @@ def cleanse_data(data: dict) -> dict:
         data[tab].dropna(axis='columns', how='all', inplace=True)
     
     return data
+
+
+def get_tickers(data: dict) -> dict:
+    tickers = {}
+    potential_tickers = []
+    amt_tab = data.get('Amount')
+    if amt_tab is not None:
+        potential_tickers = ticker_filter_totals(amt_tab, potential_tickers) 
+        potential_tickers = ticker_filter_dashes(amt_tab, potential_tickers)
+        print(f"potential tickers: {potential_tickers}")
+    return tickers
+
+
+############################################
+# Ticker filters
+############################################
+
+def ticker_filter_totals(tab: pd.DataFrame, ticker_list: list) -> list:
+    for col in tab.columns:
+        if "Total" in col:
+            continue
+        elif "Month" in col:
+            continue
+        elif "total" in col:
+            continue
+        elif "Cash" in col:
+            continue 
+        elif "401k" in col:
+            # Support only if ticker symbol (likely not)
+            continue 
+        else:
+            ticker_list.append(col)
+    
+    return ticker_list
+
+
+def ticker_filter_dashes(tab: pd.DataFrame, ticker_list: list) -> list:
+
+    return ticker_list
